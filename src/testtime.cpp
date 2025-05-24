@@ -140,8 +140,8 @@ int main() {
     cout << "pass: " << count << " / " << (test_case-1) << "\n";
     cout << (all_passed ? "All passed!" : "Some failed!") << endl;
     string version = extractVersion("index.cpp"); 
-    ofstream run_file("runtest.txt", ios::app);
-    run_file << endl << "testtime" << endl << "version : " << version << endl << "Total cases: " << (test_case-1) << endl << "pass: " << count << " / " << (test_case-1) << endl << (all_passed ? "All passed!" : "Some failed!") << endl << "--------------------" << endl; 
+    ofstream run_file("runtest.txt", ios::app);\]
+    run_file << endl << "testtime" << " : " << TIME_MAX << endl << "version : " << version << endl << "Total cases: " << (test_case-1) << endl << "pass: " << count << " / " << (test_case-1) << endl << (all_passed ? "All passed!" : "Some failed!") << endl << "--------------------" << endl; 
     // ลบไฟล์ชั่วคราว
     remove("temp_input.txt");
     remove("temp_output.txt");
