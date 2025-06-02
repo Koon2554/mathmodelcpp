@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define TIME_MAX 10000
+#define TIME_MAX 100000
 
 string extractVersion(const string& filepath) {
     ifstream file(filepath);
