@@ -1,4 +1,3 @@
-//nodemon --exec "g++ -std=c++17 main.cpp -o program && program" --ext cpp,hpp
 #include <bits/stdc++.h> 
 #include "memory.hpp"
 #include "time.hpp"
