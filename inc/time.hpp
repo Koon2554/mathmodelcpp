@@ -10,11 +10,10 @@ void starttime() {
     t_start = high_resolution_clock::now();
 }
 
-void stoptime() {
+long long stoptime() {
     t_stop = high_resolution_clock::now();
-    auto durationms = duration_cast<milliseconds>(t_stop - t_start);
     auto durationns = duration_cast<nanoseconds>(t_stop - t_start);
-    cout << "\n" << "Take time: " << durationms.count() << " ms(" << durationns.count() << ")" << endl;
+    return durationns.count();
 }
 
 #endif
