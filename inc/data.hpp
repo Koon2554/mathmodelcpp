@@ -14,12 +14,6 @@ struct data_num {
     data_num() : data(1), n(0), parameter{}, reciprocal_index{} {}
 };
 
-void input(data_num &num, string &line) {
-    getline(cin, line); 
-    cin >> num.n;          
-    cin.ignore();
-}
-
 bool is_valid_token(const string& s) {
     for (char c : s) {
         if (!(isdigit(c) || c == '.' || c == '/')) return false;
@@ -72,6 +66,13 @@ void Filter_data(data_num &num, string &line) {
     if (num.reciprocal_index.size() != num.data[0].size()) {
         num.is_harmoni = false;
     }
+}
+
+void input(data_num &num, string &line) {
+    getline(cin, line); 
+    cin >> num.n;          
+    cin.ignore();
+    Filter_data(num, line);
 }
 
 #endif
