@@ -26,9 +26,9 @@ void start_memory() {
     before = getMemoryUsageKB();
 }
 
-void stop_memory() {
+long long stop_memory() {
     SIZE_T after = getMemoryUsageKB();
-    cout << "Memory used: " << (after - before) << " KB" << endl;
+    return (after - before);
 }
 
 #endif
