@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include "create_test_case.hpp"
-#include "allinc.hpp"
-#include "calculater.hpp"
+#include "inc/create_test_case.hpp"
+#include "inc/allinc.hpp"
+#include "inc/calculater.hpp"
 using namespace std;
 #define test_max 1000
 
@@ -133,4 +133,5 @@ int main() {
     pass = 0;
     fail = 0;
     return 0;
+
 }
