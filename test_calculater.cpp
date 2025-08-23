@@ -3,7 +3,7 @@
 #include "inc/allinc.hpp"
 #include "inc/calculater.hpp"
 using namespace std;
-#define test_max 1000
+#define test_max 1e6
 
 struct test_res {
     bool ans, memory, time;
@@ -135,3 +135,4 @@ int main() {
     return 0;
 
 }
+
