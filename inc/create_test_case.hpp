@@ -7,22 +7,20 @@ using namespace std;
 
 // _______________________ ARITHMETIC SEQUENCE _______________________
 vector<long double> create_arithmetic_sequence(long double high_a1, long double high_d, int n) {
-    high_a1 = min(high_a1, 1e12L);
-    high_d = min(high_d, 1e12L);
-    random_device rd; mt19937 gen(rd());
-    uniform_real_distribution<long double> dist_a1(1, high_a1);
-    uniform_real_distribution<long double> dist_d(1, high_d);
-    long double a1 = dist_a1(gen);
-    long double d = dist_d(gen);
-
-    vector<long double> num(n);
-    num[0] = a1;
-    for (int i = 1; i < n; ++i) {
-        num[i] = num[i-1] + d;
-    }
-    return num;
+      high_a1 = min(high_d, 1e63);
+      high_d = min(n, 1e63/n);
+      random_device rd;
+      mt19937 gen(rd());
+      uniform_real_distribution<long double> dist_a1(1, high_a1), dist_d(1, high_d);
+      long double a1 = round_long_double(dist_a1(gen));
+      long double d = round_long_double(dist_d(gen));
+      vector<long double> num;
+      num.push_back(a1);
+      for (int i = 1; i < n; ++i) {
+          num.push_back(num[i-1] + d);
+      }
+      return num;
 }
-
 // _______________________ GEOMETRIC SEQUENCE _______________________
 vector<long double> create_geometric_sequence(long double high_a1, long double high_r, int n) {
     high_a1 = min(high_a1, 1e6L);
@@ -129,6 +127,7 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 }
 
 #endif
+
 
 
 
