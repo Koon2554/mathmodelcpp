@@ -39,7 +39,6 @@ auto print_result = [](const string &name, long long pass, long long fail_ans,
 int main() {
     vector<string> seq_names = {"Arithmetic", "Geometric", "Recursive", "Poly_diff", "Poly_div"};
     random_device rd; mt19937 gen(rd());
-    uniform_int_distribution<int> dist_n(0, 99);
     vector<function<vector<long double>()>> seq_generators = {
         [](){ return create_arithmetic_sequence(1000000, 1000000, 100); },
         [](){ return create_geometric_sequence(10, 10, 100); },
@@ -57,6 +56,7 @@ int main() {
             data_num num; 
             num.is_harmoni = false;
             num.data[0] = vector<long double>(data.begin(), data.begin()+6);
+            uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
             num.n = dist_n(gen);
             test_res test = test_calculater(data,num);
             if (!test.ans) fail_ans++;
@@ -70,6 +70,7 @@ int main() {
 
     return 0;
 }
+
 
 
 
