@@ -86,7 +86,7 @@ vector<long double> create_poly_diff_sequence(long double high_bn, long long hig
 }
 
 vector<long double> create_poly_div_sequence(long double high_bn, long long high_layer, int n) {
-    high_bn = min(high_bn, pow(1e63, 1/n));
+    high_bn = min(high_bn, pow(1e63, 1/(n*high_layer)));
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<long long> dist_layer(3, high_layer);
@@ -150,7 +150,8 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 // |___________|__________________________________________|
 // |PDiff      |   layer <= log(1e63) / log(n)            |
 // |___________|__________________________________________|
-// |PDiv       |   high_bn <= (1e63)^(1/n)                |
+// |PDiv       |   high_bn <= (1e63)^(1/(n*high_layer))   |
 // |___________|__________________________________________|
 // |lagrange   |   high_coef <= 1e63 / (n^degree)         |
 // |___________|__________________________________________|
+
