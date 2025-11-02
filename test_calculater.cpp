@@ -4,7 +4,7 @@
 #include "inc/calculater.hpp"
 using namespace std;
 
-#define test_max 1e2
+#define test_max 1e4
 
 struct test_res {
     bool ans, memory, time;
@@ -57,7 +57,7 @@ int main() {
             data_num num; 
             num.is_harmoni = false;
             num.data[0] = vector<long double>(data.begin(), data.begin()+6);
-            num.n = dist_n();
+            num.n = dist_n(gen);
             test_res test = test_calculater(data,num);
             if (!test.ans) fail_ans++;
             if (!test.memory) fail_mem++;
@@ -70,6 +70,7 @@ int main() {
 
     return 0;
 }
+
 
 
 
