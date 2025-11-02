@@ -4,7 +4,7 @@
 #include "inc/calculater.hpp"
 using namespace std;
 
-#define test_max 1e4
+#define test_max 1e5
 
 struct test_res {
     bool ans, memory, time;
@@ -70,6 +70,7 @@ int main() {
 
     return 0;
 }
+
 
 
 
