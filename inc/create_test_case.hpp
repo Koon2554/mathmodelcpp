@@ -29,7 +29,7 @@ vector<long double> create_geometric_sequence(long double high_a1, long double h
     high_r = min(high_r, pow(1e12L/high_a1, 1.0/(max(1,n-1))));
     random_device rd; mt19937 gen(rd());
     uniform_real_distribution<long double> dist_a1(1, high_a1);
-    uniform_real_distribution<long double> dist_r(1.01, high_r);
+    uniform_real_distribution<long double> dist_r(0.01, high_r);
     long double a1 = round_long_double(dist_a1(gen));
     long double r = round_long_double(dist_r(gen));
 
@@ -86,7 +86,7 @@ vector<long double> create_poly_div_sequence(long double high_bn, long long high
     high_bn = min(high_bn, 1e2L);
     random_device rd; mt19937 gen(rd());
     uniform_int_distribution<long long> dist_layer(2, high_layer);
-    uniform_real_distribution<long double> dist_bn(1, high_bn);
+    uniform_real_distribution<double> dist_bn(0.01, high_bn);
 
     int layer = dist_layer(gen);
     vector<long long> bn(layer);
@@ -129,5 +129,6 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 }
 
 #endif
+
 
 
