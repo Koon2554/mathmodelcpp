@@ -20,7 +20,7 @@ test_res test_calculater(vector<long double> data, data_num num) {
     } else {
         test.memory = true;
     }
-    if (res.time > 15000000) {
+    if (res.time > 1000000) {
         test.time = false;
     } else {
         test.time = true;
@@ -144,4 +144,5 @@ int main() {
     cout << "poly_div\n" << "pass : " << count[4].first << "\n" << "fail : " << count[4].second << "\n" << "time : " << t/(count[4].first+count[4].second) << "\n";
     cout << "sum : " << count[0].first+count[1].first+count[2].first+count[3].first+count[4].first;
     return 0;
+
 }
