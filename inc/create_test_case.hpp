@@ -86,9 +86,9 @@ vector<long double> create_poly_div_sequence(long double high_bn, long long high
      random_device rd;
      mt19937 gen(rd());
      uniform_int_distribution<long long> dist_layer(3, high_layer);
-     uniform_real_distribution<double> dist_bn(0.01, high_bn);
+     uniform_int_distribution<long long> dist_bn(0, high_bn);
      int layer = dist_layer(gen);
-     vector<long double> bn;
+     vector<long long> bn;
      for (int i = 0; i < layer; i++) {
         bn.push_back(dist_bn(gen));
      }
@@ -129,6 +129,7 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 }
 
 #endif
+
 
 
 
