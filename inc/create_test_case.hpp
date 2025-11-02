@@ -56,7 +56,7 @@ vector<long double> create_recursive_sequence(long double high_a, int n) {
 }
 
 // _______________________ POLY DIFFERENCE SEQUENCE _______________________
-vector<long double> create_poly_diff_sequence(long double high_bn, long longhigh_layer, int n) {
+vector<long double> create_poly_diff_sequence(long double high_bn, long long high_layer, int n) {
      high_layer = min(log(1e63)/log(n), high_layer);
      random_device rd;
      mt19937 gen(rd());
@@ -129,4 +129,5 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 }
 
 #endif
+
 
