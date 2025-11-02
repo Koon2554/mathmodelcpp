@@ -12,8 +12,8 @@ vector<long double> create_arithmetic_sequence(long double high_a1, long double 
     random_device rd; mt19937 gen(rd());
     uniform_real_distribution<long double> dist_a1(1, high_a1);
     uniform_real_distribution<long double> dist_d(1, high_d);
-    long double a1 = round_long_double(dist_a1(gen));
-    long double d = round_long_double(dist_d(gen));
+    long double a1 = dist_a1(gen);
+    long double d = dist_d(gen);
 
     vector<long double> num(n);
     num[0] = a1;
@@ -129,6 +129,7 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 }
 
 #endif
+
 
 
 
