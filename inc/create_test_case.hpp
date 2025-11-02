@@ -56,28 +56,28 @@ vector<long double> create_recursive_sequence(long double high_a, int n) {
 }
 
 // _______________________ POLY DIFFERENCE SEQUENCE _______________________
-vector<long double> create_poly_diff_sequence(long double high_bn, long long high_layer, int n) {
-    high_layer = min(high_layer, 5LL); // ปลอดภัย
-    high_bn = min(high_bn, 1e6L);
-    random_device rd; mt19937 gen(rd());
-    uniform_int_distribution<long long> dist_layer(2, high_layer);
-    uniform_real_distribution<long double> dist_bn(1, high_bn);
-
-    int layer = dist_layer(gen);
-    vector<long long> bn(layer);
-    for(int i=0;i<layer;i++) bn[i]=round_long_double(dist_bn(gen));
-
-    vector<vector<long double>> num;
-    num.push_back(vector<long double>(n+layer, bn[0]));
-
-    for(int i=1;i<layer;i++){
-        vector<long double> temp(n+layer-i, bn[i]);
-        for(int j=1;j<n+layer-i;j++){
-            temp[j] = num[i-1][j-1] + temp[j-1];
-        }
-        num.push_back(temp);
-    }
-    return num.back();
+vector<long double> create_poly_diff_sequence(long double high_bn, long longhigh_layer, int n) {
+     high_layer = min(log(1e63)/log(n), high_layer);
+     random_device rd;
+     mt19937 gen(rd());
+     uniform_int_distribution<long long> dist_layer(3, high_layer);
+     uniform_real_distribution<long double> dist_bn(1, high_bn);
+     int layer = dist_layer(gen);
+     vector<long long> bn;
+     for (int i = 0; i < layer; i++) {
+          bn.push_back(round_long_double(dist_bn(gen)));
+     }
+     vector<vector<long double>> num;
+     num.push_back(vector<long double>(n+layer, bn[0]));
+     for (int i = 1; i < layer; i++) {
+          vector<long double> temp;
+          temp.push_back(bn[i]);
+          for (int j = 1; j < n+layer-i-1; j++) {
+               temp.push_back(num[i-1][j-1]+temp[j-1]);
+          }
+          num.push_back(temp);
+      }
+      return num[num.size()-1];
 }
 
 // _______________________ POLY DIVISION SEQUENCE _______________________
@@ -129,3 +129,4 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 }
 
 #endif
+
