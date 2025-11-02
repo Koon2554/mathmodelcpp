@@ -1,25 +1,40 @@
-#ifndef MEMORY_HPP
-#define MEMORY_HPP
+// memory.hpp
+#pragma once  // ป้องกัน include ซ้ำ
 
-#define _HAS_STD_BYTE 0
-#include <iostream>
-
-#define WIN32_LEAN_AND_MEAN
+#ifdef _WIN32
 #include <windows.h>
 #include <psapi.h>
-
-#pragma comment(lib, "psapi.lib")
-
-using namespace std;
 
 static SIZE_T before = 0;
 
 SIZE_T getMemoryUsageKB() {
     PROCESS_MEMORY_COUNTERS pmc;
-    if (GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc))) {
-        return pmc.WorkingSetSize / 1024;
-    }
-    return 0;
+    GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+    return pmc.WorkingSetSize / 1024;
+}
+
+void start_memory() {
+    before = getMemoryUsageKB();
+}
+
+SIZE_T stop_memory() {
+    SIZE_T after = getMemoryUsageKB();
+    return (after - before);
+}
+
+#else
+// สำหรับ Linux / Colab / Kaggle
+#include <sys/resource.h>
+#include <unistd.h>
+#include <chrono>
+#include <thread>
+
+static long long before = 0;
+
+long long getMemoryUsageKB() {
+    struct rusage usage;
+    getrusage(RUSAGE_SELF, &usage);
+    return usage.ru_maxrss; // ru_maxrss เป็น KB
 }
 
 void start_memory() {
@@ -27,7 +42,7 @@ void start_memory() {
 }
 
 long long stop_memory() {
-    SIZE_T after = getMemoryUsageKB();
+    long long after = getMemoryUsageKB();
     return (after - before);
 }
 
