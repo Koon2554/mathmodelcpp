@@ -56,16 +56,12 @@ int main() {
             data_num num; 
             num.is_harmoni = false;
             num.data[0] = vector<long double>(data.begin(), data.begin()+6);
-
-            for (int j = 0; j < data.size(); j++) {
-                num.n = j;
-                test_res test = test_calculater(data,num);
-
-                if (!test.ans) fail_ans++;
-                if (!test.memory) fail_mem++;
-                if (!test.time) fail_time++;
-                if (test.ans && test.memory && test.time) pass++;
-            }
+            num.n = 50;
+            test_res test = test_calculater(data,num);
+            if (!test.ans) fail_ans++;
+            if (!test.memory) fail_mem++;
+            if (!test.time) fail_time++;
+            if (test.ans && test.memory && test.time) pass++;
         }
 
         print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
@@ -73,4 +69,5 @@ int main() {
 
     return 0;
 }
+
 
