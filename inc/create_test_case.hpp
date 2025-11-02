@@ -82,7 +82,7 @@ vector<long double> create_poly_diff_sequence(long double high_bn, long long hig
 
 // _______________________ POLY DIVISION SEQUENCE _______________________
 vector<long double> create_poly_div_sequence(long double high_bn, long long high_layer, int n) {
-     high_bn = min(high_bn, pow(1e63, 1/(n*high_layer));
+     high_bn = min(high_bn, pow(1e63, 1/(n*high_layer)));
      random_device rd;
      mt19937 gen(rd());
      uniform_int_distribution<long long> dist_layer(3, high_layer);
@@ -129,6 +129,7 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 }
 
 #endif
+
 
 
 
