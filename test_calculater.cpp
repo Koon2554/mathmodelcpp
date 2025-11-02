@@ -3,6 +3,7 @@
 #include "inc/allinc.hpp"
 #include "inc/calculater.hpp"
 using namespace std;
+
 #define test_max 1e4
 
 struct test_res {
@@ -13,136 +14,62 @@ long long t = 0;
 
 test_res test_calculater(vector<long double> data, data_num num) {
     test_res test;
-    result res;
-    res = calculater(num);
-    if (res.memory > 500) {
-        test.memory = false;
-    } else {
-        test.memory = true;
-    }
-    if (res.time > 1000000) {
-        test.time = false;
-    } else {
-        test.time = true;
-    }
-    if (res.ans != longDoubleToString(data[num.n-1])) {
-        test.ans = false;
-    } else {
-        test.ans = true;
-    }
+    result res = calculater(num);
+
+    test.memory = (res.memory <= 500);
+    test.time   = (res.time   <= 1000000);
+    test.ans    = (res.ans == longDoubleToString(data[num.n-1]));
+
     t += res.time;
     return test;
 }
 
-int main() {
-    long long pass = 0, fail = 0;
-    vector<pair<int, int>> count;
-    t = 0;
-    for (int i = 0; i < test_max; i++) {
-        vector<long double> data;
-        data = create_arithmetic_sequence(1000000, 1000000, 100);
-        data_num num;
-        num.is_harmoni = false;
-        num.data[0] = vector<long double>(data.begin(), data.begin() + 6);
-        for (int j = 0; j < data.size(); j++) {
-            num.n = j;
-            test_res test = test_calculater(data, num);
-            if (test.ans && test.memory && test.time) {
-                pass++;
-            } else {
-                fail++;
-            }
-        }
-    }
-    count.push_back({pass, fail});
-    pass = 0;
-    fail = 0;
-    cout << "arithmetic\n" << "pass : " << count[0].first << "\n" << "fail : " << count[0].second << "\n" << "time : " << t/(count[0].first+count[0].second) << "\n";
-    t = 0;
-    for (int i = 0; i < test_max; i++) {
-        vector<long double> data;
-        data = create_geometric_sequence(10, 10, 100);
-        data_num num;
-        num.is_harmoni = false;
-        num.data[0] = vector<long double>(data.begin(), data.begin() + 6);
-        for (int j = 0; j < data.size(); j++) {
-            num.n = j;
-            test_res test = test_calculater(data, num);
-            if (test.ans && test.memory && test.time) {
-                pass++;
-            } else {
-                fail++;
-            }
-        }
-    }
-    count.push_back({pass, fail});
-    pass = 0;
-    fail = 0;
-    cout << "geometric\n" << "pass : " << count[1].first << "\n" << "fail : " << count[1].second << "\n" << "time : " << t/(count[1].first+count[1].second) << "\n";
-    t = 0;
-    for (int i = 0; i < test_max; i++) {
-        vector<long double> data;
-        data = create_recursive_sequence(1000000, 100);
-        data_num num;
-        num.is_harmoni = false;
-        num.data[0] = vector<long double>(data.begin(), data.begin() + 6);
-        for (int j = 0; j < data.size(); j++) {
-            num.n = j;
-            test_res test = test_calculater(data, num);
-            if (test.ans && test.memory && test.time) {
-                pass++;
-            } else {
-                fail++;
-            }
-        }
-    }
-    count.push_back({pass, fail});
-    pass = 0;
-    fail = 0;
-    cout << "recursive\n" << "pass : " << count[2].first << "\n" << "fail : " << count[2].second << "\n" << "time : " << t/(count[2].first+count[2].second) << "\n";
-    t = 0;
-    for (int i = 0; i < test_max; i++) {
-        vector<long double> data;
-        data = create_poly_diff_sequence(1000000, 5, 100);
-        data_num num;
-        num.is_harmoni = false;
-        num.data[0] = vector<long double>(data.begin(), data.begin() + 6);
-        for (int j = 0; j < data.size(); j++) {
-            num.n = j;
-            test_res test = test_calculater(data, num);
-            if (test.ans && test.memory && test.time) {
-                pass++;
-            } else {
-                fail++;
-            }
-        }
-    }
-    count.push_back({pass, fail});
-    pass = 0;
-    fail = 0;
-    cout << "poly_diff\n" << "pass : " << count[3].first << "\n" << "fail : " << count[3].second << "\n" << "time : " << t/(count[3].first+count[3].second) << "\n";
-    t = 0;
-    for (int i = 0; i < test_max; i++) {
-        vector<long double> data;
-        data = create_poly_div_sequence(9, 4, 100);
-        data_num num;
-        num.is_harmoni = false;
-        num.data[0] = vector<long double>(data.begin(), data.begin() + 6);
-        for (int j = 0; j < data.size(); j++) {
-            num.n = j;
-            test_res test = test_calculater(data, num);
-            if (test.ans && test.memory && test.time) {
-                pass++;
-            } else {
-                fail++;
-            }
-        }
-    }
-    count.push_back({pass, fail});
-    pass = 0;
-    fail = 0;
-    cout << "poly_div\n" << "pass : " << count[4].first << "\n" << "fail : " << count[4].second << "\n" << "time : " << t/(count[4].first+count[4].second) << "\n";
-    cout << "sum : " << count[0].first+count[1].first+count[2].first+count[3].first+count[4].first;
-    return 0;
+auto print_result = [](const string &name, long long pass, long long fail_ans,
+                       long long fail_mem, long long fail_time, long long total_time) {
+    long long total = pass + fail_ans + fail_mem + fail_time;
+    cout << "==== " << name << " ====\n";
+    cout << "Pass        : " << pass << "\n";
+    cout << "Fail Answer : " << fail_ans << "\n";
+    cout << "Fail Memory : " << fail_mem << "\n";
+    cout << "Fail Time   : " << fail_time << "\n";
+    cout << "Average Time (µs/test) : " << (total ? total_time / total : 0) << "\n";
+    cout << "------------------------\n";
+};
 
+int main() {
+    vector<string> seq_names = {"Arithmetic", "Geometric", "Recursive", "Poly_diff", "Poly_div"};
+
+    vector<function<vector<long double>()>> seq_generators = {
+        [](){ return create_arithmetic_sequence(1000000, 1000000, 100); },
+        [](){ return create_geometric_sequence(10, 10, 100); },
+        [](){ return create_recursive_sequence(1000000, 100); },
+        [](){ return create_poly_diff_sequence(1000000, 5, 100); },
+        [](){ return create_poly_div_sequence(9, 4, 100); }
+    };
+
+    for (int s = 0; s < seq_names.size(); s++) {
+        long long pass = 0, fail_ans = 0, fail_mem = 0, fail_time = 0;
+        t = 0;
+
+        for (int i = 0; i < test_max; i++) {
+            vector<long double> data = seq_generators[s]();
+            data_num num; 
+            num.is_harmoni = false;
+            num.data[0] = vector<long double>(data.begin(), data.begin()+6);
+
+            for (int j = 0; j < data.size(); j++) {
+                num.n = j;
+                test_res test = test_calculater(data,num);
+
+                if (!test.ans) fail_ans++;
+                if (!test.memory) fail_mem++;
+                if (!test.time) fail_time++;
+                if (test.ans && test.memory && test.time) pass++;
+            }
+        }
+
+        print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
+    }
+
+    return 0;
 }
