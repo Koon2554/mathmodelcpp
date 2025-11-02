@@ -1,5 +1,4 @@
-// memory.hpp
-#pragma once  // ป้องกัน include ซ้ำ
+#pragma once
 
 #ifdef _WIN32
 #include <windows.h>
@@ -47,3 +46,4 @@ long long stop_memory() {
 }
 
 #endif
+
