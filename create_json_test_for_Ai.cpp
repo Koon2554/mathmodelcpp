@@ -37,7 +37,7 @@ int main() {
                     else p += " },\n";
                 }
             }
-            if (s == (int)seq_names.size()-1) ans += "    { \"answer\" : " + longDoubleToString(data[n]) + "} \n";
+            if (s == (int)seq_names.size()-1 && i == test_max-1) ans += "    { \"answer\" : " + longDoubleToString(data[n]) + "} \n";
             else ans += "    { \"answer\" : " + longDoubleToString(data[n]) + "}, \n";
         }
     }
@@ -48,5 +48,6 @@ int main() {
     return 0;
 
 }
+
 
 
