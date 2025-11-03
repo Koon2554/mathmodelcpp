@@ -25,7 +25,7 @@ int main() {
             vector<long double> data = seq_generators[s](), num;
             num = vector<long double>(data.begin(), data.begin() + 6);
             uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
-            p += "{ \"id\" : \"";
+            p += "    { \"id\" : \"";
             int n = dist_n(gen);
             for (int j = 0; j < num.size(); j++) {
                 p += longDoubleToString(num[j]);
@@ -33,10 +33,12 @@ int main() {
                 else {
                     p += "\", \"n\" : ";
                     p += longDoubleToString(n);
-                    p += " },\n";
+                    if (s == (int)seq_names.size()-1 && i == (int)test_max.size()) p += " }\n";
+                    else p += " },\n";
                 }
             }
-            ans += "{ \"answer\" : " + longDoubleToString(data[n]) + "}, \n";
+            if (s == (int)seq_names.size()-1) ans += "    { \"answer\" : " + longDoubleToString(data[n]) + "} \n";
+            else ans += "    { \"answer\" : " + longDoubleToString(data[n]) + "}, \n";
         }
     }
     p += "]";
@@ -46,3 +48,4 @@ int main() {
     return 0;
 
 }
+
