@@ -33,7 +33,7 @@ int main() {
                 else {
                     p += "\", \"n\" : ";
                     p += longDoubleToString(n);
-                    if (s == (int)seq_names.size()-1 && i == (int)test_max.size()) p += " }\n";
+                    if (s == (int)seq_names.size()-1 && i == test_max-1) p += " }\n";
                     else p += " },\n";
                 }
             }
@@ -48,4 +48,5 @@ int main() {
     return 0;
 
 }
+
 
