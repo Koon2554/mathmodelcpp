@@ -32,7 +32,7 @@ auto print_result = [](const string &name, long long pass, long long fail_ans,
     cout << "Fail Answer : " << fail_ans << "\n";
     cout << "Fail Memory : " << fail_mem << "\n";
     cout << "Fail Time   : " << fail_time << "\n";
-    cout << "Pass (%)    : " << (pass/total)*100 << "\n";
+    cout << "Pass (%)    : " << (double)(pass/total)*100 << "\n";
     cout << "Average Time (µs/test) : " << (total ? total_time / total : 0) << "\n";
     cout << "------------------------\n";
 };
@@ -71,6 +71,7 @@ int main() {
 
     return 0;
 }
+
 
 
 
