@@ -80,27 +80,28 @@ vector<long double> create_poly_diff_sequence(long double high_bn, long long hig
 
 // _______________________ POLY DIVISION SEQUENCE _______________________
 vector<long double> create_poly_div_sequence(long double high_bn, long long high_layer, int n) {
-     high_bn = min(high_bn, pow(1e63, 1/(n*high_layer)));
-     random_device rd;
-     mt19937 gen(rd());
-     uniform_int_distribution<long long> dist_layer(3, high_layer);
-     uniform_real_distribution<long double> dist_bn(0.01, high_bn);
-     int layer = dist_layer(gen);
-     vector<long long> bn;
-     for (int i = 0; i < layer; i++) {
-        bn.push_back(dist_bn(gen));
-     }
-     vector<vector<long double>> num;
-     num.push_back(vector<long double>(n+layer, bn[0]));
-     for (int i = 1; i < layer; i++) {
-         vector<long double> temp;
-         temp.push_back(bn[i]);
-         for (int j = 1; j < n+layer-i-1; j++) {
-              temp.push_back(round_long_double(num[i-1][j-1]*temp[j-1]));
-         }
-         num.push_back(temp);
-     }
-     return num[num.size()-1];
+      high_bn = min(high_bn, pow(1e63, 1/(n*high_layer)));
+      random_device rd;
+      mt19937 gen(rd());
+      uniform_int_distribution<long long> dist_layer(3, high_layer);
+      uniform_real_distribution<long double> dist_bn(0.01, high_bn);
+      int layer = dist_layer(gen);
+      vector<long long> bn;
+      for (int i = 0; i < layer; i++) {
+            bn.push_back(dist_bn(gen));
+            cout << bn[i] << "\n";
+      }
+      vector<vector<long double>> num;
+      num.push_back(vector<long double>(n+layer, bn[0]));
+      for (int i = 1; i < layer; i++) {
+            vector<long double> temp;
+            temp.push_back(bn[i]);
+            for (int j = 1; j < n+layer-i-1; j++) {
+                  temp.push_back(round_long_double(num[i-1][j-1]*temp[j-1]));
+            }
+            num.push_back(temp);
+      }
+      return num[num.size()-1];
 }
 
 // _______________________ LAGRANGE POLYNOMIAL SEQUENCE _______________________
@@ -127,6 +128,7 @@ vector<long double> create_lagrange_polynomial_sequence(int high_degree, long do
 }
 
 #endif
+
 
 
 
