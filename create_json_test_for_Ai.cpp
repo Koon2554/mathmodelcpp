@@ -14,8 +14,8 @@ int main() {
         [](){ return create_poly_div_sequence(9, 4, 100); }
     };
     
-    ofstream problem("problem.json");
-    ofstream answer("answer.json"); 
+    // ofstream problem("problem.json");
+    // ofstream answer("answer.json"); 
     string p = "", ans = "";
     p += "[ \n";
     ans += "[ \n";
@@ -43,11 +43,13 @@ int main() {
     }
     p += "]";
     ans += "]";
-    problem << p;
-    answer << ans;
+    cout << p << "\n" << ans << "\n";
+    // problem << p;
+    // answer << ans;
     return 0;
 
 }
+
 
 
 
