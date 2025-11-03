@@ -24,17 +24,22 @@ test_res test_calculater(vector<long double> data, data_num num) {
     return test;
 }
 
-auto print_result = [](const string &name, long long pass, long long fail_ans,
-                       long long fail_mem, long long fail_time, long long total_time) {
-    long long total = pass + fail_ans + fail_mem + fail_time;
+double cnt = 0, sum = 0;
+
+auto print_result = [](const string &name, int pass, int fail_ans,
+                       int fail_mem, int fail_time, long long total_time) {
+    int total = pass + fail_ans + fail_mem + fail_time;
+    double p = ((double)pass/total)*100;
     cout << "==== " << name << " ====\n";
     cout << "Pass        : " << pass << "\n";
     cout << "Fail Answer : " << fail_ans << "\n";
     cout << "Fail Memory : " << fail_mem << "\n";
     cout << "Fail Time   : " << fail_time << "\n";
-    cout << "Pass (%)    : " << (double)(pass/total)*100 << "\n";
-    cout << "Average Time (µs/test) : " << (total ? total_time / total : 0) << "\n";
+    cout << "Pass (%)    : " << p << "\n";
+    cout << "Average Time (µs/test) : " << (total ? total_time / (long long)total : 0) << "\n";
     cout << "------------------------\n";
+    cnt++;
+    sum += p;
 };
 
 int main() {
@@ -49,7 +54,7 @@ int main() {
     };
 
     for (int s = 0; s < seq_names.size(); s++) {
-        long long pass = 0, fail_ans = 0, fail_mem = 0, fail_time = 0;
+        int pass = 0, fail_ans = 0, fail_mem = 0, fail_time = 0;
         t = 0;
 
         for (int i = 0; i < test_max; i++) {
@@ -68,15 +73,8 @@ int main() {
 
         print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
     }
-
+    cout << "====== sum ======\n";
+    cout << "Pass (%)    : " << (double)(sum/cnt) << "\n";
+    cout << "------------------------\n";
     return 0;
 }
-
-
-
-
-
-
-
-
-
