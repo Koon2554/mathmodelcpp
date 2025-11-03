@@ -11,7 +11,7 @@ int main() {
         [](){ return create_geometric_sequence(10, 10, 100); },
         [](){ return create_recursive_sequence(1000000, 100); },
         [](){ return create_poly_diff_sequence(1000000, 5, 100); },
-        [](){ return create_poly_div_sequence(9, 4, 100); }
+        [](){ return create_poly_div_sequence(100, 5, 100); }
     };
     
     // ofstream problem("problem.json");
@@ -49,6 +49,7 @@ int main() {
     return 0;
 
 }
+
 
 
 
