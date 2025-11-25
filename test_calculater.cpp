@@ -50,7 +50,7 @@ int main() {
         [](){ return create_geometric_sequence(10, 10, 100); },
         [](){ return create_recursive_sequence(1000000, 100); },
         [](){ return create_poly_diff_sequence(1000000, 5, 100); },
-        [](){ return create_poly_div_sequence(100, 5, 10); }
+        [](){ return create_poly_div_sequence(100, 5, 100); }
     };
 
     for (int s = 0; s < seq_names.size(); s++) {
@@ -59,8 +59,8 @@ int main() {
 
         for (int i = 0; i < test_max; i++) {
             int q = 1;
-            if (s == 4) q = 10;
-            for (int j = 0; j < q; j++) {
+            // if (s == 4) q = 10;
+            // for (int j = 0; j < q; j++) {
                 vector<long double> data = seq_generators[s]();
                 data_num num; 
                 num.is_harmoni = false;
@@ -74,11 +74,12 @@ int main() {
                 if (test.ans && test.memory && test.time) pass++;
             }
             print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
-        }
+        // }
     }
     cout << "====== sum ======\n";
     cout << "Pass (%)    : " << (double)(sum/cnt) << "\n";
     cout << "------------------------\n";
     return 0;
 }
+
 
