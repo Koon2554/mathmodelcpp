@@ -50,7 +50,7 @@ int main() {
         [](){ return create_geometric_sequence(10, 10, 100); },
         [](){ return create_recursive_sequence(1000000, 100); },
         [](){ return create_poly_diff_sequence(1000000, 5, 100); },
-        [](){ return create_poly_div_sequence(100, 5, 100); }
+        [](){ return create_poly_div_sequence(100, 5, 10); }
     };
 
     for (int s = 0; s < seq_names.size(); s++) {
@@ -58,23 +58,27 @@ int main() {
         t = 0;
 
         for (int i = 0; i < test_max; i++) {
-            vector<long double> data = seq_generators[s]();
-            data_num num; 
-            num.is_harmoni = false;
-            num.data[0] = vector<long double>(data.begin(), data.begin()+6);
-            uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
-            num.n = dist_n(gen);
-            test_res test = test_calculater(data,num);
-            if (!test.ans) fail_ans++;
-            if (!test.memory) fail_mem++;
-            if (!test.time) fail_time++;
-            if (test.ans && test.memory && test.time) pass++;
+            int q = 1;
+            if (s == 4) q = 10;
+            for (int j = 0; j < q; j++) {
+                vector<long double> data = seq_generators[s]();
+                data_num num; 
+                num.is_harmoni = false;
+                num.data[0] = vector<long double>(data.begin(), data.begin()+6);
+                uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
+                num.n = dist_n(gen);
+                test_res test = test_calculater(data,num);
+                if (!test.ans) fail_ans++;
+                if (!test.memory) fail_mem++;
+                if (!test.time) fail_time++;
+                if (test.ans && test.memory && test.time) pass++;
+            }
+            print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
         }
-
-        print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
     }
     cout << "====== sum ======\n";
     cout << "Pass (%)    : " << (double)(sum/cnt) << "\n";
     cout << "------------------------\n";
     return 0;
 }
+
