@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include "inc/create_test_case.hpp"
 #include "inc/allinc.hpp"
+#include "inc/data.hpp"
 #include "inc/calculater.hpp"
 using namespace std;
 
@@ -58,18 +59,25 @@ int main() {
         t = 0;
 
         for (int i = 0; i < test_max; i++) {
-            int q = 1;
-            vector<long double> data = seq_generators[s]();
-            data_num num; 
-            num.is_harmoni = false;
-            num.data[0] = vector<long double>(data.begin(), data.begin()+6);
-            uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
-            num.n = dist_n(gen);
-            test_res test = test_calculater(data,num);
-            if (!test.ans) fail_ans++;
-            if (!test.memory) fail_mem++;
-            if (!test.time) fail_time++;
-            if (test.ans && test.memory && test.time) pass++;
+            bool c = true;
+            while (c) { 
+                vector<long double> data = seq_generators[s]();
+                uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
+                data_num num; 
+                num.n = dist_n(gen);
+                if (longDoubleToString(data[num.n]) != "-9223372036854775808.000") {
+                    c = false;
+                } else {
+                    continue;
+                }
+                num.is_harmoni = false;
+                num.data[0] = vector<long double>(data.begin(), data.begin()+6);
+                test_res test = test_calculater(data,num);
+                if (!test.ans) fail_ans++;
+                if (!test.memory) fail_mem++;
+                if (!test.time) fail_time++;
+                if (test.ans && test.memory && test.time) pass++;
+            }
         }
         print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
 
@@ -79,6 +87,3 @@ int main() {
     cout << "------------------------\n";
     return 0;
 }
-
-
-
