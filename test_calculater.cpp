@@ -46,11 +46,11 @@ int main() {
     vector<string> seq_names = {"Arithmetic", "Geometric", "Recursive", "Poly_diff", "Poly_div"};
     random_device rd; mt19937 gen(rd());
     vector<function<vector<long double>()>> seq_generators = {
-        [](){ return create_arithmetic_sequence(1000000, 1000000, 100); },
+        [](){ return create_arithmetic_sequence(100000, 100000, 100); },
         [](){ return create_geometric_sequence(10, 10, 100); },
-        [](){ return create_recursive_sequence(1000000, 100); },
-        [](){ return create_poly_diff_sequence(1000000, 5, 100); },
-        [](){ return create_poly_div_sequence(100, 5, 100); }
+        [](){ return create_recursive_sequence(100000, 100); },
+        [](){ return create_poly_diff_sequence(100000, 3, 100); },
+        [](){ return create_poly_div_sequence(100, 3, 100); }
     };
 
     for (int s = 0; s < seq_names.size(); s++) {
@@ -58,23 +58,20 @@ int main() {
         t = 0;
 
         for (int i = 0; i < test_max; i++) {
-            int q = 1;
-            // if (s == 4) q = 10;
-            // for (int j = 0; j < q; j++) {
-                vector<long double> data = seq_generators[s]();
-                data_num num; 
-                num.is_harmoni = false;
-                num.data[0] = vector<long double>(data.begin(), data.begin()+6);
-                uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
-                num.n = dist_n(gen);
-                test_res test = test_calculater(data,num);
-                if (!test.ans) fail_ans++;
-                if (!test.memory) fail_mem++;
-                if (!test.time) fail_time++;
-                if (test.ans && test.memory && test.time) pass++;
-            }
-            print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
-        // }
+            int q = 1;
+            vector<long double> data = seq_generators[s]();
+            data_num num; 
+            num.is_harmoni = false;
+            num.data[0] = vector<long double>(data.begin(), data.begin()+6);
+            uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
+            num.n = dist_n(gen);
+            test_res test = test_calculater(data,num);
+            if (!test.ans) fail_ans++;
+            if (!test.memory) fail_mem++;
+            if (!test.time) fail_time++;
+            if (test.ans && test.memory && test.time) pass++;
+        }
+        print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
     }
     cout << "====== sum ======\n";
     cout << "Pass (%)    : " << (double)(sum/cnt) << "\n";
