@@ -7,11 +7,11 @@ int main() {
     vector<string> seq_names = {"Arithmetic", "Geometric", "Recursive", "Poly_diff", "Poly_div"};
     random_device rd; mt19937 gen(rd());
     vector<function<vector<long double>()>> seq_generators = {
-        [](){ return create_arithmetic_sequence(1000000, 1000000, 100); },
-        [](){ return create_geometric_sequence(10, 10, 100); },
-        [](){ return create_recursive_sequence(1000000, 100); },
-        [](){ return create_poly_diff_sequence(1000000, 5, 100); },
-        [](){ return create_poly_div_sequence(100, 5, 100); }
+        [](){ return create_arithmetic_sequence(100000, 100000, 500); },
+        [](){ return create_geometric_sequence(10, 10, 500); },
+        [](){ return create_recursive_sequence(100000, 500); },
+        [](){ return create_poly_diff_sequence(100000, 3, 500); },
+        [](){ return create_poly_div_sequence(100, 3, 500); }
     };
     
     ofstream problem("problem.json");
@@ -48,6 +48,7 @@ int main() {
     return 0;
 
 }
+
 
 
 
