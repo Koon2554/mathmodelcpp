@@ -58,7 +58,7 @@ int main() {
         t = 0;
 
         for (int i = 0; i < test_max; i++) {
-            int q = 1;
+            int q = 1;
             vector<long double> data = seq_generators[s]();
             data_num num; 
             num.is_harmoni = false;
@@ -71,12 +71,14 @@ int main() {
             if (!test.time) fail_time++;
             if (test.ans && test.memory && test.time) pass++;
         }
-        print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
+        print_result(seq_names[s], pass, fail_ans, fail_mem, fail_time, t);
+
     }
     cout << "====== sum ======\n";
     cout << "Pass (%)    : " << (double)(sum/cnt) << "\n";
     cout << "------------------------\n";
     return 0;
 }
+
 
 
