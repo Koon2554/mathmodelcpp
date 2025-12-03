@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include "inc/create_test_case.hpp"
 using namespace std;
-#define test_max 1e1
+#define test_max 1e5
 
 int main() {
     vector<string> seq_names = {"Arithmetic", "Geometric", "Recursive", "Poly_diff", "Poly_div"};
@@ -48,6 +48,7 @@ int main() {
     return 0;
 
 }
+
 
 
 
