@@ -62,7 +62,7 @@ int main() {
             bool c = true;
             while (c) { 
                 vector<long double> data = seq_generators[s]();
-                uniform_int_distribution<int> dist_n(0, (int)data.size()-1);
+                uniform_int_distribution<int> dist_n(1, (int)data.size()-1);
                 data_num num; 
                 num.n = dist_n(gen);
                 if (longDoubleToString(data[num.n]) != "-9223372036854775808.000") {
@@ -87,3 +87,4 @@ int main() {
     cout << "------------------------\n";
     return 0;
 }
+
