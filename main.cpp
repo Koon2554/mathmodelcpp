@@ -11,6 +11,5 @@ int main() {
     input(num, line);
     res = calculater(num);
     cout << res.ans << " " << res.time << " " << res.memory;
-    cout << "hi";
     return 0;
 }
